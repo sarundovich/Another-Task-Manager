@@ -1,0 +1,36 @@
+<div id='task-{{ task.id }}'>
+<div class='message-block' >
+<table width='100%'>
+	<tr>
+		<td style='width: 70%;'>
+			{% if task.high_priority %}
+				<table style=''>
+					<tr>
+						<td>
+							<img src='/static/img/warning.png' alt='outdated' border=0 />&nbsp;
+						</td>
+						<td valign='center'>
+							<span style='color: #E3E449; font-size: 12px; font-weight: bold;'>High priority task</span>
+						</td>
+					</tr>
+				</table>
+			{% endif %}
+				<small style='color: {% if outdated %}#E0B6B6{% else %}#fff{% endif %};'>Deadline: {{ task.deadline }}{% if outdated %}&nbsp;(outdated){% endif %}</small>
+			<br/><br/>
+				<span class='edit' id='task-text-{{ task.id }}' style='font-weight: bold; text-decoration: {% if task.done %}line-through{% else %}none{% endif %};'>{{ task.name }}</span>
+		</td>
+		<td style='text-align: right;'>
+			<div id='task-done-img-{{ task.id }}' style='display: {% if task.done %}block{% else %}none{% endif %};'>
+				<img src='/static/img/done.png' border=0 alt='Done' title='Task is done!'/>
+			</div>
+		</td>
+	</tr>
+</table>
+</div>
+<div class='task-menu' id='task-menu-{{ task.id }}'>
+	<a href='#' id='finish-action-{{ task.id }}' onclick='javascript:finishTask({{ task.id }});'>{% if task.done %}Unfinish{% else %}Finish{% endif %}</a>&nbsp;
+	|&nbsp;
+	<a href='#' id='delete-task-{{ task.id }}' onclick='javascript:removeTask({{ task.id }});'>Remove</a>
+</div>
+<br/>
+</div>

@@ -1,0 +1,13 @@
+<div class='sub-headline'>
+	<a href='/'>Home</a>&nbsp;|&nbsp;
+	{% if user.id != None %}	
+		<a href='/api/'>API</a>&nbsp;|&nbsp;
+		{% if user.is_superuser %}
+			<a href='/admin/'>Admin Panel</a>&nbsp;|&nbsp;
+		{% endif %}
+		<a href='/accounts/logout'>Logout</a>
+	{% else %}
+		<a href='/accounts/register'>Sign Up</a>&nbsp;|&nbsp;
+		<a href='/accounts/login/'>Log In</a>
+	{% endif %}	
+</div>

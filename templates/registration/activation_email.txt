@@ -1,0 +1,9 @@
+Hello,
+
+Please follow this link to complete your registration on another task manager:
+http://127.0.0.1:8000/activate/{{ activation_key }}/
+
+You have {{ expiration_days }} days to complete it.
+
+Sincerely,
+Another Code Slave

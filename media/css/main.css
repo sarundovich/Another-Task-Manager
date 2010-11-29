@@ -1,0 +1,246 @@
+/*
+	main scheme color: #263A48
+*/
+
+body {
+	background-color: #373737;
+	padding: 0px;
+	margin: 0px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 14px;
+}
+
+input[type="submit"] {
+	border: 1px solid #7EA2BB;
+	background-color: #496F8A;
+	color: #444;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 2px 10px 2px 10px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 12px;
+}
+
+
+input[type="text"], input[type='password'] {
+	border: 1px solid #373737;
+	color: #444;
+}
+
+.editable input {
+	border: 1px solid #373737;
+	color: #444;
+	width: auto;
+} 
+
+.editable button {
+	border: 1px solid #7EA2BB;
+	background-color: #496F8A;
+	color: #444;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+	padding: 2px 10px 2px 10px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 12px;
+} 
+
+a:link {
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 14px;
+	letter-spacing: 1px;
+	font-weight: bold;
+	color: #EAE9FD;
+	text-decoration: none;
+}
+   
+a:visited {
+	color: #EAE9FD;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.headline {
+	width: 100%;
+	background-image: url('../img/cool-bg.png');
+	background-color: #496F8A;
+	border-bottom: 1px solid #7EA2BB;
+	padding: 5px;
+	margin: 0px;
+	vertical-align: middle;
+	font-family: times, Times New Roman, times-roman, georgia, serif;
+	color: #444;
+	font-size: 40px;
+	line-height: 44px;
+	letter-spacing: -2px;
+	font-weight: bold;
+}
+
+
+
+.sub-headline {
+	margin-top: 7px;
+	font-family: Gill Sans, Verdana;
+	font-size: 13px;
+	line-height: 14px;
+	letter-spacing: 1px;
+	font-weight: bold;
+	color: #EAE9FD;
+}
+
+.main-content {
+	padding: 20px;
+	font-family: "Helvetica Neue", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 14px;
+    color: #666;
+}
+
+.message-block {
+	background-color: #666;
+	color: #7EA2BB;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.error {
+	color: #C16E6E;
+}
+
+.errorlist {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	list-style-type: none;
+}
+
+.msg-container {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.login-form-tbl {
+	width: 140px;
+}
+
+.site-btn {
+	border: 1px solid #7EA2BB;
+	background-color: #496F8A;
+	color: #444;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 2px;
+	width: 110px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 12px;
+}
+
+.hint {
+	border-bottom: 1px dashed #fff;
+	color: #fff;
+	font-size: 12px;
+}
+
+.task-menu {
+	margin-left: 25px;
+	-moz-border-radius: 5px;
+	border-radius: 0px 0px 5px 5px;
+	width: 180px;
+	text-align: center;
+	padding-left: 9px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	background-color: #496F8A;
+	color: #fff;
+	font-size: 11px;
+}
+
+.task-menu a:link {
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	/*
+	line-height: 12px;
+	letter-spacing: 1px;
+	font-weight: normal;
+	*/
+	color: #EAE9FD;
+	text-decoration: none;
+}
+   
+.task-menu a:visited {
+	color: #EAE9FD;
+}
+
+.task-menu a:hover {
+	text-decoration: underline;
+}
+
+.ajax-indicator {
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	margin-right: 0px;
+	display: none;
+}
+
+#new-task {
+	display: none; 
+	margin-bottom: 25px;
+}
+
+#new-task-msg {
+	display: none; 
+	margin-top: 7px; 
+	margin-bottom: 5px;
+}
+
+.tables {
+	border: 1px solid #666;
+}
+
+.tables th {
+	border-left: 1px solid #666;
+	background-color: #666; 
+	/*background-color: #496F8A;*/ 
+	padding: 2px 10px 2px 10px;
+	color: #333;
+}
+
+.tables td {
+	vertical-align: top;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666;
+	padding: 2px 10px 2px 10px;
+}
+
+.task-filter a:link {
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #EAE9FD;
+	/*border-bottom: 1px dashed #fff;
+	text-decoration: underline;*/
+}
+   
+.task-filter a:visited {
+	color: #EAE9FD;
+}
+
+.task-filter a:hover {
+	text-decoration: none;	
+	/*text-decoration: underline;*/
+}
+
+.tag-bg {
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #666; 
+	padding: 2px 7px 2px 7px;
+}
+

@@ -1,0 +1,42 @@
+{% extends "master.html" %}
+
+{% block title %}Log In as user{% endblock %}
+
+{% block content %}
+<h3>Log In as registered user</h3><br/>
+
+{% if form.errors %}
+    <span class='error'>Login error. Please check your credentials.</span><br/>
+{% endif %}
+
+<form action='.' method='post'>
+  	{% csrf_token %} 
+	<table class='login-form-tbl'>
+  		<tr>
+  			<td>
+  				<label for="username">login:</label>
+  			</td>
+  			<td>
+  				<input type="text" name="username" value="" id="username"><br/>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>
+  				<label for="password">password:</label>
+  			</td>
+  			<td>
+  				<input type="password" name="password" value="" id="password">
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>
+  				&nbsp;
+  			</td>
+  			<td>
+  				<input type="submit" value="Log In" />
+  			</td>
+  		</tr>
+  	</table>
+	<input type="hidden" name="next" value="/" />
+</form>
+{% endblock %}

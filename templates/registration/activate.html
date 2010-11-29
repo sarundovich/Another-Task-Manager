@@ -1,0 +1,9 @@
+{% extends "master.html" %}
+
+{% block title %}New user activation{% endblock %}
+
+{% block content %}
+<h3>Account activation</h3>
+<b>Welcome aboard, {{ account }}!</b><br/>
+Your account has been successfully activated. Now you can <a href="{% url auth_login %}">Log In</a>
+{% endblock %}

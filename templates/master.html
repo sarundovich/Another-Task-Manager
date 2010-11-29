@@ -1,0 +1,19 @@
+{% load helper_tags %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<link href="/static/css/main.css" rel="stylesheet" type="text/css" />
+		<script type='text/javascript' src='/static/js/jquery.js'></script>
+		{% block scripts %}{% endblock %}
+	</head>
+	<body>
+		<div class='headline'>
+			Another task manager<br/>
+			{% render_main_menu user %}
+		</div>
+		<div class='main-content'>
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>

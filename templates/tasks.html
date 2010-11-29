@@ -1,0 +1,102 @@
+{% extends 'master.html' %}
+{% load helper_tags %}
+
+{% block title %}Your tasks{% endblock %}
+
+{% block scripts %}
+	<link href="/static/css/ui-darkness/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script type='text/javascript' src='/static/js/jquery-ui.js'></script>
+	<script type='text/javascript' src='/static/js/jquery.jeditable.mini.js'></script>
+	<script type='text/javascript' src='/static/js/tasks_actions.js'></script>
+{% endblock %}
+
+{% block content %}
+<h3>Dear {{ user.username }}, here are your tasks</h3>
+	<div class='site-btn' id='new-task-btn'>
+		+Add a new task
+	</div>
+	
+	<div id='new-task'>
+		<div class='message-block'>	
+		<b>Adding a new task</b>
+		<div id='new-task-msg'>
+		</div>
+		<form action='' method='POST'>
+			<table>
+				<tr>
+					<td>
+						<label for='deadline'>*deadline:</label>
+					</td>
+					<td>
+						<input type='text' name='deadline' id='deadline' />
+					</td>
+				</tr>
+				<tr style='vertical-align: top;'>
+					<td>
+						<label for='name'>*task:</label>
+					</td>
+					<td>
+						<textarea cols=40 rows=3 name='name' id='name'></textarea>
+					</td>
+				</tr>
+				<tr style='vertical-align: top;'>
+					<td>
+						
+					</td>
+					<td>
+						<input type='checkbox' name='priority' id='priority' value='priority'>&nbsp;high priority task
+					</td>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						<div class='ajax-indicator' id='ajax-indicator'>
+							<img src='/static/img/ajax-loader.gif' border=0/>
+						</div>
+						<table>
+							<tr>
+								<td>
+									<div class='site-btn' id='new-task-cancel'>
+										Cancel
+									</div>
+								</td>
+								<td>
+									<div class='site-btn' id='new-task-submit'>
+										Done
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>			
+		</form>
+		<small>* - fields required</small>
+		</div>
+	</div>
+<br/>
+
+<div class='task-filter'>
+	<div style='margin-bottom: 5px;'>
+	<b>Tasks filter:</b>&nbsp;
+	</div>
+	<span class='tag-bg'><a href='/' id='all'>all</a></span>&nbsp;
+	<span class='tag-bg'><a href='/tasks-filter/prior/' id='prior'>high priority</a></span>&nbsp;
+	<span class='tag-bg'><a href='/tasks-filter/today/' id='today'>today</a></span>&nbsp;
+	<span class='tag-bg'><a href='/tasks-filter/tomorrow/' id='tomorrow'>tomorrow</a></span>&nbsp;
+	<span class='tag-bg'><a href='/tasks-filter/finished/' id='finished'>finished</a></span>&nbsp;
+	<span class='tag-bg'><a href='/tasks-filter/outdated/' id='outdated'>outdated</a></span>&nbsp;
+</div>
+<br/>
+
+
+
+<div id='tasks-holder'>
+	{% for task in tasks %}
+    	{% render_task task %} 
+	{% endfor %}
+</div>
+
+{% endblock %}

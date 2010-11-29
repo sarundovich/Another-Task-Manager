@@ -1,0 +1,45 @@
+{% extends "master.html" %}
+{% block title %}New user registration{% endblock %}
+
+{% block content %}
+
+<h3>New user registration</h3>
+
+{% if form.errors %}
+    <span class='error'>Please check errors below:</span><br/>
+{% endif %}
+<form method="post" action="">
+{% csrf_token %}
+	<table>
+	{% for field in form %}
+		<tr>
+			<td>
+				{{ field.label_tag }}:
+			</td>
+			<td>			
+    			{{ field }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				
+			</td>
+			<td>
+				{% if field.errors %}
+					<span class="error" style='width: 500px;'>{{ field.errors }}</span>
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				<input type="submit" value="Sign Up" />
+			</td>
+		</tr>
+	</table>
+</form>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+<h1>Hi there, {% if user.id == None %}anonymous{% else %}{{ user.username }}{% endif %}!</h1>
+<div class='message-block'>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus nisl non nisl elementum consequat. Curabitur pulvinar fermentum est ac ornare. Phasellus a lectus urna. Aliquam nisl velit, dapibus quis ultrices ac, venenatis at nibh. Vivamus eget libero justo, non pretium ipsum. Curabitur posuere feugiat lacus, sed lacinia tortor molestie quis. Suspendisse vitae aliquet risus. Mauris vel tellus non dolor placerat euismod sit amet sed neque. Sed nulla est, euismod at fermentum vitae, volutpat in sem. Quisque laoreet vestibulum turpis, ut commodo ante gravida quis. Cras tempor augue et elit consequat at convallis neque venenatis.
+</div>
+{% endblock %}
