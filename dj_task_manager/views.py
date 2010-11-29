@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf8
 
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
@@ -13,7 +13,7 @@ from dj_task_manager.forms import NewTaskForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-def is_ajax(func):
+def ajax_required(func):
     @wraps(func)
     def inner(request, *args, **kwargs):
         if request.is_ajax():
@@ -60,7 +60,7 @@ def tasks_filter(request, filter):
 
 #+++ajax actions (tasks)
 
-@is_ajax 
+@ajax_required 
 def ajax_add_task(request):
     form = NewTaskForm(request.POST)
     if form.is_valid():
@@ -74,52 +74,30 @@ def ajax_add_task(request):
         return HttpResponse(dumps({'success': True, 'task_id': task.id}))
     else:
         return HttpResponse(dumps({'success': False}))
-       
-#@is_ajax      
-#def ajax_get_tasks(request):
-#    tasks = Task.objects.filter(user_id = request.user.id).order_by('deadline')
-#    tasks_out = [];
-#    for task in tasks:
-#        tasks_out.append(render_to_string('tags/task.html', {'task': task}))
-#    tasks_out = ''.join(tasks_out)
-#    out_json = dumps({'success': True, 'tasks': tasks_out})
-#    return HttpResponse(out_json)
 
-@is_ajax 
+@ajax_required 
 def ajax_render_task(request):
-    try:
-        tid = int(request.GET.get('task_id'))
-    except ValueError:
-        raise Http404
-    task = Task.objects.get(id=tid)
-    today = datetime.date.today()
+    task = get_task_by_id(get_task_id(request.POST))
+    today = get_today_date()
     outdated = True if task.deadline < today  else False
     task_html = render_to_string('tags/task.html', {'task': task, 'outdated': outdated})
     out_json = dumps({'success': True, 'task_html': task_html})
     return HttpResponse(out_json)
 
-@is_ajax
+@ajax_required
 def ajax_remove_task(request):
-    try:
-        tid = int(request.POST.get('task_id'))
-    except ValueError:
-        raise Http404
-    task = Task.objects.get(id=tid)
+    task = get_task_by_id(get_task_id(request.POST))
     task.delete()
     return HttpResponse(dumps({'success': True}))
     
-@is_ajax    
+@ajax_required    
 def ajax_finish_task(request):
-    try:
-        tid = int(request.POST.get('task_id'))
-    except ValueError:
-        raise Http404
-    task = Task.objects.get(id=tid)
+    task = get_task_by_id(get_task_id(request.POST))
     task.done = False if task.done else True
     task.save()
     return HttpResponse(dumps({'success': True, 'is_done': task.done}))
 
-@is_ajax       
+@ajax_required       
 def edit_task(request):
     try:
         tid = int(request.POST.get('id').split('-')[-1])
@@ -133,25 +111,40 @@ def edit_task(request):
 
 #---end of ajax actions
 
+@login_required
 def admin_users(request):
-    users = User.objects.all().order_by('id')
-    return render_to_response('admin_users.html', 
+    if request.user.is_superuser:
+        users = User.objects.all().order_by('id')
+        return render_to_response('admin_users.html', 
                                   {'users': users}, 
                                   context_instance=RequestContext(request))
+    else:
+        raise Http404
 
-@is_ajax
+@ajax_required
 @login_required
 def admin_rem_user(request):
     try:
         uid = int(request.POST.get('user_id'))
     except ValueError:
         raise Http404
-    task = User.objects.get(id=uid)
-    task.delete()
+    user = User.objects.get(id=uid)
+    user.delete()
     return HttpResponse(dumps({'success': True}))
 
 def api(request):
     raise Http404
+
+#+++ helper funcs
+
+def get_task_id(request_data):
+    try:
+        return int(request_data.get('task_id'))
+    except ValueError:
+        raise Http404
+    
+def get_task_by_id(tid):
+    return Task.objects.get(id=tid)
 
 def get_today_date():
     return datetime.date.today()
@@ -159,3 +152,5 @@ def get_today_date():
 def _task_to_dict(task):
     return {'name': task.name, 'done': task.done, 
             'deadline': task.deadline.isoformat() if task.deadline is not None else ''}
+    
+#--- end of helper funcs
